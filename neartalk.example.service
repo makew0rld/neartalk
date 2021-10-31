@@ -10,5 +10,5 @@ WantedBy=webserver.service
 
 [Service]
 WorkingDirectory=/path/to/neartalk-git
-ExecStart=./neartalk -port 1234 -key PUT-ADMIN-KEY-HERE
+ExecStart=/path/to/neartalk-git/neartalk -port 1234 -key PUT-ADMIN-KEY-HERE
 Restart=always
