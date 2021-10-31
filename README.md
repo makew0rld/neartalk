@@ -1,6 +1,6 @@
 # NearTalk
 
-Visit [neartalk.makeworld.space](https://neartalk.makeworld.space) to check it out!
+Visit [neartalk.makeworld.space](https://neartalk.makeworld.space) to check it out! That server always runs the latest code on the `main` branch.
 
 <!-- Copied from html/about.html -->
 
