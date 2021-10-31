@@ -380,10 +380,8 @@ func (cs *chatServer) connect(ctx context.Context, ip string, conn *websocket.Co
 func getIPString(r *http.Request) string {
 	xForwardedFor := r.Header.Get("X-Forwarded-For")
 	forwardedIPs := strings.Split(xForwardedFor, ", ")
-	if len(forwardedIPs) > 1 {
-		// The server is reverse-proxied. If there was just one value,
-		// that would indicate the server not being reverse-proxied,
-		// and also someone is trying to spoof their IP address.
+	if len(forwardedIPs) > 0 {
+		// The server is reverse-proxied.
 
 		// Return final value in the list, to guard against spoofing
 		// https://stackoverflow.com/a/65270044
