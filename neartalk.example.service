@@ -1,0 +1,14 @@
+# This is an example SystemD service file for deploying NearTalk
+# "webserver" is the web server you are using for reverse proxying.
+
+[Unit]
+Description=NearTalk server
+After=webserver.service
+
+[Install]
+WantedBy=webserver.service
+
+[Service]
+WorkingDirectory=/path/to/neartalk-git
+ExecStart=./neartalk -port 1234 -key PUT-ADMIN-KEY-HERE
+Restart=always

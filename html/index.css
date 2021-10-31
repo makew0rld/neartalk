@@ -1,0 +1,223 @@
+body {
+    word-wrap: break-word;
+    background-color: white;
+    font-size: 1rem
+}
+
+.center {
+    text-align: center;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+#content {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    height: 0px; /* Needed for dynamic flex height sizing, idk */
+}
+
+#chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#users {
+    flex: none;
+    min-width: 10vw;
+    width: min-content;
+    margin-left: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#users-header {
+    flex: none;
+}
+
+#users-list {
+    flex: 1;
+    overflow-y: auto;
+    line-height: .5;
+}
+
+/*
+Disable users list for mobile, as usually it's too much.
+This includes larger screens like iPads in landscape but whatever
+*/
+@media (pointer:none), (pointer:coarse) {
+    #chat {
+        width: 100%;
+    }
+    #users {
+        display: none;
+    }
+}
+
+/* 100vh on safari does not include the bottom bar. */
+@supports (-webkit-overflow-scrolling: touch) {
+    #root {
+        height: 85vh;
+    }
+}
+/* Same with Firefox Mobile */
+@media (pointer:none), (pointer:coarse) {
+    @supports ( -moz-appearance:none ) {
+        #root {
+            height: 90vh;
+        }
+    }
+}
+
+#header {
+    flex: none;
+    line-height: 1;
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+}
+
+#send-form-div {
+    flex: none;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#send-form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#message-input {
+    flex: 1;
+    margin-right: 10px;
+    min-width: 0px;
+}
+/* Try to prevent form zoom on iOS */
+@media (pointer:none), (pointer:coarse) {
+    #message-input {
+        font-size: 16px !important;
+    }
+}
+
+#send-btn {
+    flex: none;
+}
+
+#message-table {
+    display: block;
+}
+
+td {
+    padding: 0 .5em;
+    vertical-align: top;
+}
+@media (pointer:none), (pointer:coarse) {
+    /* Allow table cell wrapping on mobile and reduce unecessary padding */
+    td {
+        padding: 0 .2em;
+        display: inline-block;
+    }
+}
+
+/* Don't wrap timestamps in table */
+#message-table-tbody > tr > td:nth-of-type(1) {
+    white-space: nowrap;
+}
+@media (pointer:none), (pointer:coarse) {
+    /* Hide timestamps on mobile */
+    #message-table-tbody > tr > td:nth-of-type(1) {
+        display: none;
+    }
+}
+/* Nicknames */
+#message-table-tbody > tr > td:nth-of-type(2) {
+    font-weight: bold;
+}
+/* Third table column, where msgs are */
+#message-table-tbody > tr > td:nth-of-type(3) {
+    word-break: break-word;
+    line-height: 1.1;
+    padding-top: 0.2em;
+}
+
+#send-form input[type="text"] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    word-break: normal;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#send-form input[type="submit"] {
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: none;
+}
+
+#send-form input[type="submit"]:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+#send-form input[type="submit"]:active {
+    background-color: green;
+}
+
+@media (pointer:none), (pointer:coarse) {
+    /* Button stays green after pressing otherwise */
+    #send-form input[type="submit"]:hover {
+        background-color: black;
+    }
+}
+
+/* Message classes */
+
+@media (pointer:none), (pointer:coarse) {
+    /* Keep messages without nicknames inline with others */
+    .special-msg > td:nth-of-type(2) {
+        padding: 0;
+    }
+}
+
+.error {
+    color: red;
+}
+
+.notif {
+    color: gray;
+    font-style: italic;
+}
+
+.my-msg {
+}
+
+
+
+.my-nick {
+    color: gray;
+    font-weight: normal !important;
+}
+
+
+
+/* Simple classes */
+
+.bold {
+    font-weight: bold;
+}

@@ -1,0 +1,19 @@
+/*
+Hi there! Please take this CSS and use it for your own projects.
+It's a great little thing.
+*/
+
+body {
+    margin: 40px auto;
+    max-width: 720px;
+    line-height: 1.6;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    padding: 0 20px;
+    word-wrap: break-word;
+    font-family: Sans-Serif;
+}
+
+h1, h2, h3 {
+    line-height: 1.2
+}

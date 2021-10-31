@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>NearTalk</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+        <meta http-equiv="Pragma" content="no-cache"/>
+        <meta http-equiv="Expires" content="0"/>
+
+        <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+        <link href="https://unpkg.com/sanitize.css/typography.css" rel="stylesheet" />
+        <link href="https://unpkg.com/sanitize.css/forms.css" rel="stylesheet" />
+        <link href="/index.css" rel="stylesheet" />
+
+        <script src="https://unpkg.com/htmx.org@1.6.0" integrity="sha384-G4dtlRlMBrk5fEiRXDsLjriPo8Qk5ZeHVVxS8KhX6D7I9XXJlNqbdvRlp9/glk5D" crossorigin="anonymous"></script>
+        <meta name="htmx-config" content='{"useTemplateFragments": true}'>
+        <script defer>
+        htmx.on("htmx:load", function(evt) {
+            var eleID = evt.detail.elt.parentElement.attributes["id"]
+            if (eleID != undefined && eleID.value == "message-table-tbody") {
+                // New message has arrived in chat
+
+                // Focus input when message arrives
+                document.getElementById("message-input").focus()
+                
+                // Convert UTC datetime from server into local timestamp
+                var ts = evt.detail.elt.cells[0]
+                if (ts.textContent == "") {
+                    // No timestamp provided, skip
+                    return
+                }
+                var d = new Date(ts.textContent)
+                ts.innerHTML = d.toLocaleTimeString()
+            }
+        });
+        </script>
+    </head>
+    <body hx-ws="connect:/connect">
+        <noscript>This site requires JavaScript to work.</noscript>
+        <div id="root">
+            <div id="header" class="center">
+                <h1>NearTalk</h1>
+                <h2 id="ip-addr"></h2>
+                <p>
+                <a href="/about.html" target="_blank">About</a> | 
+                <a href="/privacy_policy.html" target="_blank">Privacy Policy</a>
+                </p>
+            </div>
+            <div id="content">
+                <div id="chat">
+                    <div id="messages">
+                        <table id="message-table"><tbody id="message-table-tbody"></tbody></table>
+                    </div>
+                    <div id="send-form-div">
+                        <form id="send-form" hx-ws="send" autocomplete="off">
+                            <input name="message" id="message-input" type="text" />
+                            <input value="Send" id="send-btn" type="submit" />
+                        </form>
+                    </div>
+                </div>
+                <div id="users">
+                    <div id="users-header"><p id="users-header-p" class="bold">Users</p></div>
+                    <div id="users-list"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
