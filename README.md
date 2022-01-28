@@ -42,7 +42,7 @@ Only the latest Go (1.17) is tested, but Go 1.16+ should compile.
 
 ## Deploying
 
-You can look at the [neartalk.example.service](./neartalk.example.service) file in the repo as an example for running NearTalk under SystemD.
+You can look at the [neartalk.example.service](./neartalk.example.service) file in the repo as an example for running NearTalk under systemd.
 
 Currently the code does not handle TLS certificates, and so a reverse-proxy is required to use TLS and ensure user security. Make sure you set up your reverse-proxy so that websockets work as well. Just look up `<server name> reverse proxy websocket` to find a configuration.
 
