@@ -11,6 +11,7 @@ import (
 	"os"
 	"os/signal"
 	"strconv"
+	"syscall"
 	"time"
 )
 
@@ -67,7 +68,7 @@ func run() error {
 
 	// Wait for server error or process signals (like Ctrl-C)
 	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, os.Interrupt)
+	signal.Notify(sigs, os.Interrupt, syscall.SIGTERM)
 	select {
 	case err := <-errc:
 		log.Printf("failed to serve: %v", err)
